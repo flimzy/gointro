@@ -1,0 +1,153 @@
+Go Introduction
+for non-Go coders
+2 Jun 2017
+
+Jonathan Hall
+jonathan.hall@teamwork.com
+
+* Agenda
+
+This presentation is aimed at programmers with experience in a programming
+language other than Go, and who wish to, or are required, to work with Go.
+
+This presentation consists of the following topics:
+
+- A brief description
+- Overview of the Go philosophy
+- Syntax whirlwind
+- Libraries
+- Go tooling
+- Error handling
+- Where to find help
+
+* Go at 30,000 feet
+
+The Go programming language is an open source project to make programmers more
+productive.
+
+Go is:
+
+- fast
+- expressive
+- concise
+- concurrent
+- statically-type (but feels dynamically typed)
+- garbage-collected
+- compiled
+
+* The Go philosophy
+
+“Il semble que la perfection soit atteinte non quand il n'y a plus rien à ajouter, mais quand il n'y a plus rien à retrancher.”
+
+Or: Perfection is finally attained not when there is no longer anything to add, but when there is no longer anything to take away.
+
+.link https://en.wikiquote.org/wiki/Antoine_de_Saint_Exup%C3%A9ry Source: Antoine de Saint Exupéry
+
+“Less is exponentially more.”
+
+.link https://commandcenter.blogspot.ie/2012/06/less-is-exponentially-more.html Source: Rob Pike
+
+* Design goals
+
+Is the problem with C++ (or Java, JavaScript, Perl, Python, or any other language) really that it doesn't have enough features?
+
+According to the Go authors: No.
+
+- Starting point: C, fix some obvious flaws, remove crud, add a few missing features.
+
+- “What makes Go successful?” - “Simplicity” -- [[https://talks.golang.org/2015/simplicity-is-complicated.slide#4][Rob Pike]]
+
+- “Readability is paramount.” -- [[https://talks.golang.org/2015/simplicity-is-complicated.slide#11][Rob Pike]]
+
+- “The ratio of time spent reading versus writing is well over 10 to 1. We are constantly reading old code as part of the effort to write new code. [Therefore,] making it easy to read makes it easier to write.” -- [[https://www.goodreads.com/quotes/835238-indeed-the-ratio-of-time-spent-reading-versus-writing-is][Robert C. Martin]]
+
+* Syntax Whirlwind tour
+
+- Go syntax is inspired by C.
+- Go syntax values readability over all else.
+- Go removes unnecessary syntax: ‘;’ at the end of a line, ‘(’ and ‘)’ around if blocks, etc
+- Go syntax is consistent. Double quotes are always for strings. Single quotes are always for runes (think: single characters). Backquotes are always for unescaped newlines.
+- Go syntax doesn't hide complexity. No built-in map/reduce functionality, for example.
+
+* Syntax examples
+
+- Go syntax is simpler where possible:
+
+ if score > 100 {
+     fmt.Printf("You win!")
+ }
+
+- Go syntax is consistent
+
+ a := "foo"
+ b := 'bar' // Invalid
+ c := `baz
+   qux`
+
+- Go syntax doesn't take shortcuts
+
+ for name, score := range playerScores {
+     if score > 100 {
+         fmt.Printf("Player %s won!", name)
+     }
+ }
+
+* The Go ecosystem
+
+Go has a mature, and growing, collection of libraries.
+
+- Standard library is extensive
+- Third party libraries are more extensive
+- "Publishing" Go libraries is easy
+
+* Go tools you should be using
+
+- gofmt
+
+“Gofmt's style is no one's favorite, yet gofmt is everyone's favorite.” -- [[https://www.youtube.com/watch?v=PAAkCSZUG1c&t=8m43s][Rob Pike]]
+
+- govet
+- gometalinter
+
+* Go error handling
+
+- “Don't panic.” -- [[https://github.com/golang/go/wiki/CodeReviewComments#dont-panic][Author unknown]]
+
+ func Validate(x int) error {
+     if x < 0 || x > 100 {
+         // panic("x is not valid")           // NO!!
+         return errors.New("x is not valid")  // Yes!
+     }
+ }
+
+- “Errors are values.” -- [[https://www.youtube.com/watch?v=PAAkCSZUG1c&t=16m13s][Rob Pike]]
+
+- “Don't just check errors, handle them gracefully.” -- [[https://www.youtube.com/watch?v=PAAkCSZUG1c&t=17m25s][Rob Pike]]
+
+ _ = frobnicate()
+
+Is equivalent to:
+
+ try {
+     frobnicate()
+ } catch(e) {}
+
+* Other random things I like about Go
+
+- Unicode support
+- Goroutines
+- The 'testing' package
+
+* Further reading
+
+- [[https://tour.golang.org/welcome/1][A Tour of Go]]
+- [[https://golang.org/][The official Go site]]
+- [[https://godoc.org/][GoDoc]]
+- Read the standard library.
+- Google. Hint: search for “golang”
+- [[https://stackoverflow.com/questions/tagged/go][StackOverflow]] Hint: Don't call it “golang”
+- Ask me!
+
+Other:
+
+- [[https://go-proverbs.github.io/][Go Proverbs]]
